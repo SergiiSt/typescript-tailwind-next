@@ -36,8 +36,11 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
+import useLogin from "../hooks/useLogin";
 
 export default function LoginForm() {
+  const loginMutation = useLogin();
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -46,17 +49,20 @@ export default function LoginForm() {
     // Convert FormData to plain object
     formData.forEach((value, key) => {
       data[key] = value.toString();
-      console.log(data["username"]);
+      console.log({ username: data["username"] });
+      console.log({ password: data["password"] });
+      loginMutation.mutate({
+        username: data["username"],
+        password: data["password"],
+      });
     });
-
-    
 
     // alert(`Form submitted with: ${JSON.stringify(data, null, 2)}`);
   };
 
   return (
     <Form className="flex w-96 flex-col gap-4 mx-auto" onSubmit={onSubmit}>
-      <TextField isRequired name="username" type="text">
+      <TextField isRequired name="username" type="text" autoComplete="username">
         <Label>Username</Label>
         <Input placeholder="username123" />
         <FieldError />
@@ -67,6 +73,7 @@ export default function LoginForm() {
         minLength={8}
         name="password"
         type="password"
+        autoComplete="current-password"
         validate={(value) => {
           if (value.length < 8) {
             return "Password must be at least 8 characters";
