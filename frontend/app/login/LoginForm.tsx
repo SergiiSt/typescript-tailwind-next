@@ -1,29 +1,3 @@
-// "use client";
-
-// export default function LoginForm() {
-//   return (
-//     <>
-//       <form action="/login" className="flex justify-center flex-col">
-//         <input
-//           className="border w-87.5 mx-auto mb-4 p-2 rounded"
-//           type="text"
-//           name="username"
-//           placeholder="Username"
-//           autoComplete="username"
-//         />
-//         <input
-//           className="border w-87.5 mx-auto mb-4 p-2 rounded"
-//           type="password"
-//           name="password"
-//           placeholder="Password"
-//           autoComplete="current-password"
-//         />
-//         <button type="submit">Login</button>
-//       </form>
-//     </>
-//   );
-// }
-
 "use client";
 
 import { Check } from "@gravity-ui/icons";
@@ -46,18 +20,16 @@ export default function LoginForm() {
     const formData = new FormData(e.currentTarget);
     const data: Record<string, string> = {};
 
-    // Convert FormData to plain object
     formData.forEach((value, key) => {
       data[key] = value.toString();
-      console.log({ username: data["username"] });
-      console.log({ password: data["password"] });
-      loginMutation.mutate({
-        username: data["username"],
-        password: data["password"],
-      });
     });
 
-    // alert(`Form submitted with: ${JSON.stringify(data, null, 2)}`);
+    console.log({ username: data["username"] });
+    console.log({ password: data["password"] });
+    loginMutation.mutate({
+      username: data["username"],
+      password: data["password"],
+    });
   };
 
   return (

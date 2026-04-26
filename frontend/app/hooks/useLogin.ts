@@ -12,19 +12,22 @@ type LoginResponse = {
 };
 
 async function loginUser(data: LoginData): Promise<LoginResponse> {
+  console.log("password type:", typeof data.password);
   const response = await fetch("/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
+    credentials: "include",
   });
 
+  const result = await response.json();
   if (!response.ok) {
-    throw new Error("Login failed");
+    throw new Error(`HTTP ${response.status}: ${result.message}`);
   }
 
-  return response.json();
+  return result;
 }
 
 export default function useLogin() {
@@ -33,8 +36,11 @@ export default function useLogin() {
     mutationFn: loginUser,
     onSuccess: (data) => {
       console.log("success", data.id);
+
       router.push("/dashboard");
+      router.refresh();
     },
+
     onError: (error) => {
       console.error("Login error:", error);
     },
