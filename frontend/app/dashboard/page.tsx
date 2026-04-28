@@ -25,6 +25,7 @@ export default function DashboardPage() {
           placeholder="Enter your ID"
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
+          className="p-1 border-solid border-2 border-#0485f7-300 rounded"
         />
         <Button type="submit">Get User Info</Button>
       </form>
