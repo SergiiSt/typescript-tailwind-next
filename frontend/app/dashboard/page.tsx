@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@heroui/react";
-import { useGetUser } from "../hooks/useGetUser";
+import { useGetUser } from "../../hooks/useGetUser";
 import { useState } from "react";
 
 export default function DashboardPage() {
