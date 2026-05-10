@@ -12,8 +12,7 @@ type LoginResponse = {
 };
 
 async function loginUser(data: LoginData): Promise<LoginResponse> {
-  console.log("password type:", typeof data.password);
-  const response = await fetch("/auth/login", {
+  const response = await fetch("/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -34,15 +33,13 @@ export default function useLogin() {
   const router = useRouter();
   return useMutation({
     mutationFn: loginUser,
-    onSuccess: (data) => {
-      console.log("success", data.id);
-
+    onSuccess: () => {
       router.push("/dashboard");
       router.refresh();
     },
 
     onError: (error) => {
-      console.error("Login error:", error);
+      new Error("Login error", error);
     },
   });
 }

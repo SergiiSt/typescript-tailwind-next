@@ -6,7 +6,7 @@ type User = {
 };
 
 async function fetchUser(id: string): Promise<User> {
-  const response = await fetch(`/auth/${id}`, {
+  const response = await fetch(`/api/auth/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

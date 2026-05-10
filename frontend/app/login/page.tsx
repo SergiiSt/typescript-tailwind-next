@@ -1,6 +1,6 @@
 import LoginForm from "./LoginForm";
 
-export default async function Login() {
+export default function Login() {
   return (
     <>
       <h1 className="text-center mb-4">Login page</h1>

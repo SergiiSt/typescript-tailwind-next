@@ -6,9 +6,10 @@ import { useState } from "react";
 
 export default function DashboardPage() {
   const [userId, setUserId] = useState("");
-  const { data, refetch, error } = useGetUser(userId);
+  const { data, refetch, error, isLoading } = useGetUser(userId);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (!userId) return;
     refetch();
   };
@@ -29,7 +30,7 @@ export default function DashboardPage() {
         />
         <Button type="submit">Get User Info</Button>
       </form>
-
+      {isLoading ? <p className="mt-6">Loading...</p> : null}
       {data && <p className="mt-6">Username: {data.username}</p>}
       {error && <p className="mt-6 text-red-500">User not found</p>}
     </section>
