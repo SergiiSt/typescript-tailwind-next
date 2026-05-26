@@ -42,4 +42,14 @@ export class AuthController {
 
     res.status(200).json(user).send();
   }
+  @Post("/logout")
+logout(@Res({ passthrough: true }) res: express.Response) {
+  res.clearCookie("auth_token", {
+    path: "/",
+  });
+
+  return {
+    message: "Logged out",
+  };
+}
 }
